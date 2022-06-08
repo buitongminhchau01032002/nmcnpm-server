@@ -14,7 +14,7 @@ Content-Type: application/json
 GET http://localhost:5000/api/customer
 
 ### Read one customer
-GET http://localhost:5000/api/customer/3
+GET http://localhost:5000/api/customer/11
 
 ### Update customer
 PUT http://localhost:5000/api/customer/2
@@ -71,19 +71,29 @@ POST http://localhost:5000/api/saving
 Content-Type: application/json
 
 {
-            "nameCustomer": "Dương Thị Quỳnh",
-            "identityNumber": "845699321645",
-            "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
-            "dateCreate": "2022-06-08",
-            "money": 2700000,
-            "typeSavingId": 2
-        }
+    "nameCustomer": "Dương Thị Quỳnh",
+    "identityNumber": "845699321645",
+    "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
+    "dateCreate": "2022-06-08",
+    "money": 2700000,
+    "typeSavingId": 2
+}
 
 ### Read saving
 GET http://localhost:5000/api/saving
 
 ### Read one saving
 GET http://localhost:5000/api/saving/3
+
+### Update saving
+PUT http://localhost:5000/api/saving/2
+Content-Type: application/json
+
+{
+    "nameCustomer": "Dương Thị Nga",
+    "identityNumber": "998456321645",
+    "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An"
+}
 
 ### Delete saving
 DELETE  http://localhost:5000/api/saving/1

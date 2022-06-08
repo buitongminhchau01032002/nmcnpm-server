@@ -87,7 +87,7 @@ const read = async (req, res) => {
     }
 };
 
-// [GET] api/saving
+// [GET] api/saving/:id
 const readOne = async (req, res) => {
     const id = req.params.id;
     try {
@@ -96,6 +96,65 @@ const readOne = async (req, res) => {
             return res.json({ success: true, saving });
         } else {
             return res.status(401).json({ success: false, message: 'id not found' });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+// [PUT] api/saving/:id
+const update = async (req, res) => {
+    const id = Number(req.params.id);
+    const saving = req.body;
+    console.log(saving);
+    // simple Validate
+    if (saving.identityNumber === undefined) {
+        return res.status(400).json({
+            success: false,
+            message: 'Missing field',
+        });
+    }
+
+    let customerId;
+
+    try {
+        // Validate Identity Number
+        const checkIdentityNumber = await Customer.findOne({ identityNumber: saving.identityNumber });
+        if (checkIdentityNumber) {
+            // Existed customer
+            customerId = checkIdentityNumber.id;
+        } else {
+            // New customer
+
+            // Create customer
+            const newCustomer = new Customer({
+                identityNumber: saving.identityNumber,
+                name: saving.nameCustomer,
+                address: saving.addressCustomer,
+            });
+            await newCustomer.save();
+            if (!newCustomer) {
+                return res.status(401).json({
+                    success: false,
+                    message: 'Cannot create customer',
+                });
+            }
+
+            customerId = newCustomer.id;
+        }
+
+        // Update saving (customerId)
+        const newSaving = await Saving.findOneAndUpdate({ id }, { customerId }, { new: true })
+            .populate('customer')
+            .populate('typeSaving');
+        if (!newSaving) {
+            return res.status(401).json({ success: false, message: 'id not found' });
+        } else {
+            return res.json({ success: true, message: 'saving updated!', newSaving });
         }
     } catch (error) {
         console.log(error.message);
@@ -126,4 +185,4 @@ const deletee = async (req, res) => {
     }
 };
 
-module.exports = { create, read, readOne, deletee };
+module.exports = { create, read, readOne, update, deletee };
