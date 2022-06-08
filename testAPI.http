@@ -1,0 +1,63 @@
+### CUSTOMMER ##################
+
+### Create type saving
+POST http://localhost:5000/api/customer
+Content-Type: application/json
+
+{
+    "name": "Vũ Thanh Tùng",
+    "identityNumber": "643216984955",
+    "address": "57/5, ấp Hoà Thành, xã Định An, thị trấn An Lộc, Tỉnh Bến Tre"
+}
+
+### Read type saving
+GET http://localhost:5000/api/customer
+
+### Read one type saving
+GET http://localhost:5000/api/customer/3
+
+### Update type saving
+PUT http://localhost:5000/api/customer/2
+Content-Type: application/json
+
+{
+    "name": "Đoàn Thị Thuỷ",
+    "identityNumber": "998456321645",
+    "address": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An"
+}
+
+### Delete type saving
+DELETE  http://localhost:5000/api/customer/1
+
+### TYPE SAVNG ##################
+
+### Create type saving
+POST http://localhost:5000/api/typesaving
+Content-Type: application/json
+
+{
+    "name": "12 tháng",
+    "termMonth": 12,
+    "interestRate": 6,
+    "numDayCanWithdraw": 360
+}
+
+### Read type saving
+GET http://localhost:5000/api/typesaving
+
+### Read one type saving
+GET http://localhost:5000/api/typesaving/3
+
+### Update type saving
+PUT http://localhost:5000/api/typesaving/2
+Content-Type: application/json
+
+{
+    "name": "Không kì hạn mới 3",
+    "termMonth": 3,
+    "interestRate": 5.5,
+    "numDayCanWithdraw": 180
+}
+
+### Delete type saving
+DELETE  http://localhost:5000/api/typesaving/1
