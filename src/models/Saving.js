@@ -2,36 +2,39 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
-const SavingSchema = new Schema({
-    id: {
-        type: Number,
-        unique: true,
+const SavingSchema = new Schema(
+    {
+        id: {
+            type: Number,
+            unique: true,
+        },
+        typeSavingId: {
+            type: Number,
+            required: true,
+        },
+        customerId: {
+            type: Number,
+            required: true,
+        },
+        dateCreate: {
+            type: Date,
+            required: true,
+        },
+        dateLastExchange: {
+            type: Date,
+            required: true,
+        },
+        currentMoney: {
+            type: Number,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
     },
-    typeSavingId: {
-        type: Number,
-        required: true,
-    },
-    customerId: {
-        type: Number,
-        required: true,
-    },
-    dateCreate: {
-        type: Date,
-        required: true,
-    },
-    dateLastExchange: {
-        type: Date,
-        required: true,
-    },
-    currentMoney: {
-        type: Number,
-        required: true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+    { toJSON: { virtuals: true } },
+);
 
 SavingSchema.virtual('customer', {
     ref: 'customers',

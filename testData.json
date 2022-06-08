@@ -56,5 +56,55 @@
             "identityNumber": "643216984955",
             "address": "57/5, ấp Hoà Thành, xã Định An, thị trấn An Lộc, Tỉnh Bến Tre"
         }
+    ],
+    "saving": [
+        {
+            "nameCustomer": "Nguyễn Thành Nam",
+            "identityNumber": "123456789",
+            "addressCustomer": "số 45, đường Văn Hưng, phường 43, quận Tân Thạch, Thành phố Hồ Chí Minh",
+            "dateCreate": "2022-06-08",
+            "money": 1000000,
+            "typeSavingId": 1
+        },
+        {
+            "nameCustomer": "Đoàn Thị Hương",
+            "identityNumber": "998456321645",
+            "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
+            "dateCreate": "2022-06-08",
+            "money": 2000000,
+            "typeSavingId": 1
+        },
+        {
+            "nameCustomer": "Đinh Hoàng Lộc",
+            "identityNumber": "984956321645",
+            "addressCustomer": "15/4, ấp Long Hưng, xã Long Thành, huyện Trị Yên, tỉnh Đồng Nai",
+            "dateCreate": "2022-06-08",
+            "money": 3000000,
+            "typeSavingId": 2
+        },
+        {
+            "nameCustomer": "Nguyễn Thanh Tuấn",
+            "identityNumber": "123257789",
+            "addressCustomer": "số 45, đường Văn Hưng, phường 43, quận Tân Thạch, Thành phố Hồ Chí Minh",
+            "dateCreate": "2022-06-08",
+            "money": 1780000,
+            "typeSavingId": 3
+        },
+        {
+            "nameCustomer": "Dương Thị Quỳnh",
+            "identityNumber": "845699321645",
+            "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
+            "dateCreate": "2022-06-08",
+            "money": 2700000,
+            "typeSavingId": 2
+        },
+        {
+            "nameCustomer": "Đinh Quang Lâm",
+            "identityNumber": "784951646325",
+            "addressCustomer": "15/4, ấp Long Hưng, xã Long Thành, huyện Trị Yên, tỉnh Đồng Nai",
+            "dateCreate": "2022-06-08",
+            "money": 1200000,
+            "typeSavingId": 1
+        }
     ]
 }

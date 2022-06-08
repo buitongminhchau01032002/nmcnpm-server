@@ -5,6 +5,7 @@ require('dotenv').config();
 // require routes
 const customerRoute = require('./routes/customer');
 const typeSavingRoute = require('./routes/typeSaving');
+const savingRoute = require('./routes/saving');
 
 // db
 const connectDB = async () => {
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/customer', customerRoute);
 app.use('/api/typesaving', typeSavingRoute);
+app.use('/api/saving', savingRoute);
 
 app.listen(PORT, () => {
     console.log('App running at port: ' + PORT);

@@ -1,22 +1,22 @@
 ### CUSTOMMER ##################
 
-### Create type saving
+### Create customer
 POST http://localhost:5000/api/customer
 Content-Type: application/json
 
 {
-    "name": "Vũ Thanh Tùng",
-    "identityNumber": "643216984955",
+    "name": "Hoà Thanh Tùng",
+    "identityNumber": "634984952165",
     "address": "57/5, ấp Hoà Thành, xã Định An, thị trấn An Lộc, Tỉnh Bến Tre"
 }
 
-### Read type saving
+### Read customer
 GET http://localhost:5000/api/customer
 
-### Read one type saving
+### Read one customer
 GET http://localhost:5000/api/customer/3
 
-### Update type saving
+### Update customer
 PUT http://localhost:5000/api/customer/2
 Content-Type: application/json
 
@@ -26,8 +26,9 @@ Content-Type: application/json
     "address": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An"
 }
 
-### Delete type saving
+### Delete customer
 DELETE  http://localhost:5000/api/customer/1
+
 
 ### TYPE SAVNG ##################
 
@@ -61,3 +62,28 @@ Content-Type: application/json
 
 ### Delete type saving
 DELETE  http://localhost:5000/api/typesaving/1
+
+
+### SAVNG ##################
+
+### Create saving
+POST http://localhost:5000/api/saving
+Content-Type: application/json
+
+{
+            "nameCustomer": "Dương Thị Quỳnh",
+            "identityNumber": "845699321645",
+            "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
+            "dateCreate": "2022-06-08",
+            "money": 2700000,
+            "typeSavingId": 2
+        }
+
+### Read saving
+GET http://localhost:5000/api/saving
+
+### Read one saving
+GET http://localhost:5000/api/saving/3
+
+### Delete saving
+DELETE  http://localhost:5000/api/saving/1

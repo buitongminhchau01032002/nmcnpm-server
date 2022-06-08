@@ -21,7 +21,7 @@ const create = async (req, res) => {
     try {
         const newCustomer = new Customer(customer);
         await newCustomer.save();
-        res.json({
+        return res.json({
             success: true,
             message: 'Create customer successfully',
             customer: newCustomer,
