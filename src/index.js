@@ -41,6 +41,9 @@ app.use((req, res, next) => {
 app.use('/api/customer', customerRoute);
 app.use('/api/typesaving', typeSavingRoute);
 app.use('/api/saving', savingRoute);
+app.get('/', (req, res) => {
+    res.send('<h1>Hello world!</h1>');
+});
 
 app.listen(PORT, () => {
     console.log('App running at port: ' + PORT);
