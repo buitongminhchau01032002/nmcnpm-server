@@ -29,6 +29,9 @@ Content-Type: application/json
 ### Delete customer
 DELETE  http://localhost:5000/api/customer/1
 
+### Find customer by identity
+GET http://localhost:5000/api/customer/find/identity/321698495645
+
 
 ### TYPE SAVNG ##################
 

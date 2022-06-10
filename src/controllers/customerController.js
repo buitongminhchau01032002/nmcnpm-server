@@ -126,4 +126,23 @@ const deletee = async (req, res) => {
     }
 };
 
-module.exports = { create, read, readOne, update, deletee };
+// [GET] api/customer/find/identity/:identity
+const findIdentityNumber = async (req, res) => {
+    const identityNumber = req.params.identity;
+    try {
+        const customer = await Customer.findOne({ identityNumber });
+        if (customer) {
+            return res.json({ success: true, customer });
+        } else {
+            return res.status(401).json({ success: false, message: 'identity number not found' });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+module.exports = { create, read, readOne, update, deletee, findIdentityNumber };
