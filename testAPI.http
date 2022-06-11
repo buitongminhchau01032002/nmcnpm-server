@@ -83,10 +83,10 @@ Content-Type: application/json
 }
 
 ### Read saving
-GET http://localhost:5000/api/saving
+GET http://localhost:5000/api/saving?currentDay=2022-10-01
 
 ### Read one saving
-GET http://localhost:5000/api/saving/3
+GET http://localhost:5000/api/saving/3?currentDay=2022-10-01
 
 ### Update saving
 PUT http://localhost:5000/api/saving/2

@@ -89,8 +89,37 @@ const create = async (req, res) => {
 
 // [GET] api/saving
 const read = async (req, res) => {
+    const { currentDay } = req.query;
+
     try {
-        const savings = await Saving.find({}).populate('customer').populate('typeSaving');
+        let savings = await Saving.find({}).populate('customer').populate('typeSaving');
+
+        savings = savings.map((saving) => saving.toObject({ virtuals: true }));
+        savings.forEach((saving) => {
+            let totalMoney = -1;
+            if (currentDay) {
+                // Tính số ngày lãi
+                let dateLastExchange = moment(saving.dateLastExchange);
+                let _currentDay = moment(currentDay);
+                let numOfDay = _currentDay.diff(dateLastExchange, 'day');
+                console.log(numOfDay);
+                // Tính tiền lãi
+                let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
+
+                // Tính tổng lãi
+                let totalProfit;
+                if (saving.currentProfit) {
+                    totalProfit = profit + saving.currentProfit;
+                } else {
+                    totalProfit = profit;
+                }
+
+                // Tính tổng tiền
+                totalMoney = Math.floor(saving.currentMoney + totalProfit);
+                saving.totalMoney = totalMoney;
+            }
+        });
+
         return res.json({
             success: true,
             savings,
@@ -107,9 +136,34 @@ const read = async (req, res) => {
 // [GET] api/saving/:id
 const readOne = async (req, res) => {
     const id = req.params.id;
+    const { currentDay } = req.query;
     try {
-        const saving = await Saving.findOne({ id }).populate('customer').populate('typeSaving');
+        let saving = await Saving.findOne({ id }).populate('customer').populate('typeSaving');
         if (saving) {
+            saving = saving.toObject({ virtuals: true });
+            let totalMoney = -1;
+            if (currentDay) {
+                // Tính số ngày lãi
+                let dateLastExchange = moment(saving.dateLastExchange);
+                let _currentDay = moment(currentDay);
+                let numOfDay = _currentDay.diff(dateLastExchange, 'day');
+                console.log(numOfDay);
+                // Tính tiền lãi
+                let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
+
+                // Tính tổng lãi
+                let totalProfit;
+                if (saving.currentProfit) {
+                    totalProfit = profit + saving.currentProfit;
+                } else {
+                    totalProfit = profit;
+                }
+
+                // Tính tổng tiền
+                totalMoney = Math.floor(saving.currentMoney + totalProfit);
+                saving.totalMoney = totalMoney;
+            }
+
             return res.json({ success: true, saving });
         } else {
             return res.status(401).json({ success: false, message: 'id not found' });
