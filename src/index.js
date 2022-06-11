@@ -6,6 +6,8 @@ require('dotenv').config();
 const customerRoute = require('./routes/customer');
 const typeSavingRoute = require('./routes/typeSaving');
 const savingRoute = require('./routes/saving');
+const ruleRoute = require('./routes/rule');
+const depositRoute = require('./routes/deposit');
 
 // db
 const connectDB = async () => {
@@ -41,6 +43,8 @@ app.use((req, res, next) => {
 app.use('/api/customer', customerRoute);
 app.use('/api/typesaving', typeSavingRoute);
 app.use('/api/saving', savingRoute);
+app.use('/api/rule', ruleRoute);
+app.use('/api/deposit', depositRoute);
 app.get('/', (req, res) => {
     res.send('<h1>Hello world!</h1>');
 });

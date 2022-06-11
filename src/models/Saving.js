@@ -28,6 +28,9 @@ const SavingSchema = new Schema(
             type: Number,
             required: true,
         },
+        currentProfit: {
+            type: Number,
+        },
         createdAt: {
             type: Date,
             default: Date.now,

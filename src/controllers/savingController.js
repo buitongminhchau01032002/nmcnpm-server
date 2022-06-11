@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Saving = require('../models/Saving');
 const Customer = require('../models/Customer');
+const Rule = require('../models/Rule');
 
 // [POST] api/saving
 const create = async (req, res) => {
@@ -16,6 +17,22 @@ const create = async (req, res) => {
         return res.status(400).json({
             success: false,
             message: 'Missing field',
+        });
+    }
+
+    try {
+        const minMoney = await Rule.findOne({ name: 'minMoneyBegin' });
+        if (minMoney.value > Number(saving.money)) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid money',
+            });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
         });
     }
 

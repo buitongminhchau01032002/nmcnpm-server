@@ -78,7 +78,7 @@ Content-Type: application/json
     "identityNumber": "845699321645",
     "addressCustomer": "54/3, ấp Văn Nghĩa, xã Vĩnh Lộc, huyện Tân Phú, tỉnh Long An",
     "dateCreate": "2022-06-08",
-    "money": 2700000,
+    "money": 1000000,
     "typeSavingId": 2
 }
 
@@ -100,3 +100,32 @@ Content-Type: application/json
 
 ### Delete saving
 DELETE  http://localhost:5000/api/saving/1
+
+### RULE ##################
+
+### Read rule
+GET http://localhost:5000/api/rule
+
+### Read one rule
+GET http://localhost:5000/api/rule/minMoneyDeposit
+
+### Update rule
+PUT http://localhost:5000/api/rule/minMoneyDeposit
+Content-Type: application/json
+
+{
+    "value": 200000
+}
+
+
+### DEPOSIT ##################
+
+### Create deposit
+POST http://localhost:5000/api/deposit
+Content-Type: application/json
+
+{
+    "savingId": 2,
+    "dateDeposit": "2022-10-11",
+    "money": 200000
+}
