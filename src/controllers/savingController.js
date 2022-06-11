@@ -165,7 +165,7 @@ const update = async (req, res) => {
     }
 };
 
-// [DELETE] api/delete/:id
+// [DELETE] api/saving/:id
 const deletee = async (req, res) => {
     const id = req.params.id;
 
@@ -185,4 +185,38 @@ const deletee = async (req, res) => {
     }
 };
 
-module.exports = { create, read, readOne, update, deletee };
+// [GET] api/saving/filter?id=<id>&nameCustomer=<nameCustomer>&typesavingId=<typesavingId>&currentMoney=<currentMoney>
+const filter = async (req, res) => {
+    const param = req.query;
+
+    const filterObject = {};
+    if (param.id) {
+        filterObject.id = param.id;
+    }
+    if (param.typeSavingId) {
+        filterObject.typeSavingId = param.typeSavingId;
+    }
+    if (param.currentMoney) {
+        filterObject.currentMoney = param.currentMoney;
+    }
+    try {
+        let savings = await Saving.find(filterObject).populate('customer').populate('typeSaving');
+        savings = savings.map((saving) => saving.toObject({ virtuals: true }));
+        console.log(savings);
+        if (param.nameCustomer) {
+            savings = savings.filter((saving) => saving.customer.name === param.nameCustomer);
+        }
+        return res.json({
+            success: true,
+            savings,
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+module.exports = { create, read, readOne, update, deletee, filter };

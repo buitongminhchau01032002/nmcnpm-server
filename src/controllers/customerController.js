@@ -145,4 +145,36 @@ const findIdentityNumber = async (req, res) => {
     }
 };
 
-module.exports = { create, read, readOne, update, deletee, findIdentityNumber };
+// [GET] api/customer/filter?id=<id>&name=<name>&address=<address>&identityNumber=<identityNumber>
+const filter = async (req, res) => {
+    const param = req.query;
+
+    const filterObject = {};
+    if (param.id) {
+        filterObject.id = param.id;
+    }
+    if (param.identityNumber) {
+        filterObject.identityNumber = param.identityNumber;
+    }
+    if (param.address) {
+        filterObject.address = param.address;
+    }
+    if (param.name) {
+        filterObject.name = param.name;
+    }
+    try {
+        let customers = await Customer.find(filterObject);
+        return res.json({
+            success: true,
+            customers,
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+module.exports = { create, read, readOne, update, deletee, findIdentityNumber, filter };
