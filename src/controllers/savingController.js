@@ -165,7 +165,11 @@ const update = async (req, res) => {
         }
 
         // Update saving (customerId)
-        const newSaving = await Saving.findOneAndUpdate({ id }, { customerId }, { new: true })
+        const newSaving = await Saving.findOneAndUpdate(
+            { id },
+            { customerId, dateCreate: saving.dateCreate, typeSavingId: saving.typeSavingId },
+            { new: true },
+        )
             .populate('customer')
             .populate('typeSaving');
         if (!newSaving) {

@@ -25,6 +25,12 @@ const create = async (req, res) => {
                 message: 'Invalid saving',
             });
         }
+        if (saving.dateClose) {
+            return res.status(401).json({
+                success: false,
+                message: 'Sổ đã đóng',
+            });
+        }
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({
@@ -54,7 +60,8 @@ const create = async (req, res) => {
     let dateLastExchange = moment(saving.dateLastExchange);
     let dateDeposit = moment(deposit.dateDeposit);
     let numOfDay = dateDeposit.diff(dateLastExchange, 'day');
-    if (numOfDay < 30) {
+    console.log(numOfDay);
+    if (numOfDay < saving.typeSaving.termMonth * 30) {
         return res.status(401).json({
             success: false,
             message: 'Invalid day',
@@ -77,7 +84,7 @@ const create = async (req, res) => {
         } else {
             updateSaving.currentProfit = profit;
         }
-        updateSaving.currentMoney = saving.currentMoney + deposit.money;
+        updateSaving.currentMoney = saving.currentMoney + Number(deposit.money);
 
         // Update saving (customerId)
         await Saving.findOneAndUpdate({ id: saving.id }, updateSaving, { new: true })

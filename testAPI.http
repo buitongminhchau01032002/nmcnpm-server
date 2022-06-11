@@ -126,6 +126,19 @@ Content-Type: application/json
 
 {
     "savingId": 2,
-    "dateDeposit": "2022-10-11",
+    "dateDeposit": "2022-07-11",
     "money": 200000
+}
+
+
+### WITHDRAW ##################
+
+### Create withdraw
+POST http://localhost:5000/api/withdraw
+Content-Type: application/json
+
+{
+    "savingId": 3,
+    "dateWithdraw": "2022-09-30",
+    "money": 0
 }
