@@ -87,13 +87,11 @@ const create = async (req, res) => {
     let dateCreate = moment(saving.dateCreate);
     let numOfDayCreate = dateWithdraw.diff(dateCreate, 'day');
 
-    if (saving.typeSaving.termMonth !== 0) {
-        if (numOfDayCreate < saving.typeSaving.numDayCanWithdraw) {
-            return res.status(401).json({
-                success: false,
-                message: 'Invalid day',
-            });
-        }
+    if (numOfDayCreate < saving.typeSaving.numDayCanWithdraw) {
+        return res.status(401).json({
+            success: false,
+            message: 'Invalid day',
+        });
     }
 
     try {
