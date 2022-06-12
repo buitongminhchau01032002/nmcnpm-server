@@ -10,6 +10,7 @@ const ruleRoute = require('./routes/rule');
 const depositRoute = require('./routes/deposit');
 const withdrawRoute = require('./routes/withdraw');
 const reportDayRoute = require('./routes/reportDay');
+const reportMonthRoute = require('./routes/reportMonth');
 
 // db
 const connectDB = async () => {
@@ -49,6 +50,7 @@ app.use('/api/rule', ruleRoute);
 app.use('/api/deposit', depositRoute);
 app.use('/api/withdraw', withdrawRoute);
 app.use('/api/reportday', reportDayRoute);
+app.use('/api/reportmonth', reportMonthRoute);
 app.get('/', (req, res) => {
     res.send('<h1>Hello world!</h1>');
 });

@@ -154,4 +154,12 @@ Content-Type: application/json
 }
 
 ### Read report
-GET http://localhost:5000/api/reportday/2022-06-30
+GET http://localhost:5000/api/reportmonth/2022-06?typeSavingId=1
+
+###
+POST http://localhost:5000/api/reportmonth
+Content-Type: application/json
+
+{
+    "month": "2022-06"
+}
