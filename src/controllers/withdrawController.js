@@ -44,7 +44,7 @@ const create = async (req, res) => {
     let dateLastExchange = moment(saving.dateLastExchange);
     let dateWithdraw = moment(withdraw.dateWithdraw);
     let numOfDay = dateWithdraw.diff(dateLastExchange, 'day');
-
+    console.log('Day in withdraw', numOfDay);
     // Tính tiền lãi
     let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
 
@@ -59,7 +59,6 @@ const create = async (req, res) => {
     // Tính tổng tiền
     let totalMoney = Math.floor(saving.currentMoney + totalProfit);
 
-    console.log(totalMoney);
     // Validate Money
     if (Number(withdraw.money) < 0) {
         return res.status(401).json({

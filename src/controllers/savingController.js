@@ -102,7 +102,7 @@ const read = async (req, res) => {
                 let dateLastExchange = moment(saving.dateLastExchange);
                 let _currentDay = moment(currentDay);
                 let numOfDay = _currentDay.diff(dateLastExchange, 'day');
-                console.log(numOfDay);
+
                 // Tính tiền lãi
                 let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
 
@@ -147,7 +147,8 @@ const readOne = async (req, res) => {
                 let dateLastExchange = moment(saving.dateLastExchange);
                 let _currentDay = moment(currentDay);
                 let numOfDay = _currentDay.diff(dateLastExchange, 'day');
-                console.log(numOfDay);
+                console.log('Day in saving:', numOfDay);
+
                 // Tính tiền lãi
                 let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
 
@@ -277,10 +278,34 @@ const filter = async (req, res) => {
     try {
         let savings = await Saving.find(filterObject).populate('customer').populate('typeSaving');
         savings = savings.map((saving) => saving.toObject({ virtuals: true }));
-        console.log(savings);
         if (param.nameCustomer) {
             savings = savings.filter((saving) => saving.customer.name === param.nameCustomer);
         }
+        savings.forEach((saving) => {
+            let totalMoney = -1;
+            currentDay = param.currentDay;
+            if (currentDay) {
+                // Tính số ngày lãi
+                let dateLastExchange = moment(saving.dateLastExchange);
+                let _currentDay = moment(currentDay);
+                let numOfDay = _currentDay.diff(dateLastExchange, 'day');
+
+                // Tính tiền lãi
+                let profit = numOfDay * (saving.currentMoney * (saving.typeSaving.interestRate / 365 / 100));
+
+                // Tính tổng lãi
+                let totalProfit;
+                if (saving.currentProfit) {
+                    totalProfit = profit + saving.currentProfit;
+                } else {
+                    totalProfit = profit;
+                }
+
+                // Tính tổng tiền
+                totalMoney = Math.floor(saving.currentMoney + totalProfit);
+                saving.totalMoney = totalMoney;
+            }
+        });
         return res.json({
             success: true,
             savings,
