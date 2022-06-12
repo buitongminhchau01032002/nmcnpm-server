@@ -145,10 +145,13 @@ Content-Type: application/json
 
 ### REPORT ##################
 
-### Create withdraw
+### Create report
 POST http://localhost:5000/api/reportday
 Content-Type: application/json
 
 {
     "date": "2022-06-30"
 }
+
+### Read report
+GET http://localhost:5000/api/reportday/2022-06-30

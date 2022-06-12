@@ -114,4 +114,20 @@ const create = async (req, res) => {
     }
 };
 
-module.exports = { create };
+// [GET] api/reportDay/:date
+const read = async (req, res) => {
+    const date = req.params.date;
+
+    try {
+        const reports = await ReportDay.find({ date }).populate('typeSaving');
+        return res.json({ success: true, reports });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+module.exports = { create, read };
