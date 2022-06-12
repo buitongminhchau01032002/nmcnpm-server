@@ -142,3 +142,13 @@ Content-Type: application/json
     "dateWithdraw": "2022-09-30",
     "money": 0
 }
+
+### REPORT ##################
+
+### Create withdraw
+POST http://localhost:5000/api/reportday
+Content-Type: application/json
+
+{
+    "date": "2022-06-30"
+}

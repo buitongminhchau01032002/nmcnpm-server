@@ -2,6 +2,7 @@ const moment = require('moment');
 const Saving = require('../models/Saving');
 const Customer = require('../models/Customer');
 const Rule = require('../models/Rule');
+const Deposit = require('../models/Deposit');
 
 // [POST] api/saving
 const create = async (req, res) => {
@@ -38,9 +39,9 @@ const create = async (req, res) => {
 
     const newSaving = {
         typeSavingId: Number(saving.typeSavingId),
-        dateCreate: moment(saving.dateCreate, 'YYYY-MM-DD').toDate(),
+        dateCreate: saving.dateCreate,
         currentMoney: saving.money,
-        dateLastExchange: moment(saving.dateCreate, 'YYYY-MM-DD').toDate(),
+        dateLastExchange: saving.dateCreate,
     };
 
     try {
@@ -73,6 +74,16 @@ const create = async (req, res) => {
         // Create saving
         const _newSaving = new Saving(newSaving);
         await _newSaving.save();
+
+        // Tao phieu nhap
+        const newDeposit = new Deposit({
+            savingId: _newSaving.id,
+            dateDeposit: saving.dateCreate,
+            money: saving.money,
+        });
+        await newDeposit.save();
+        console.log(newDeposit);
+
         return res.json({
             success: true,
             message: 'Create saving successfully',
