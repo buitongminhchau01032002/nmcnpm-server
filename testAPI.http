@@ -110,11 +110,12 @@ GET http://localhost:5000/api/rule
 GET http://localhost:5000/api/rule/minMoneyDeposit
 
 ### Update rule
-PUT http://localhost:5000/api/rule/minMoneyDeposit
+PUT http://localhost:5000/api/rule
 Content-Type: application/json
 
 {
-    "value": 200000
+    "minMoneyBegin": 1000000,
+    "minMoneyDeposit": 100000
 }
 
 

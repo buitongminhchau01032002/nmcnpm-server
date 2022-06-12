@@ -64,4 +64,44 @@ const update = async (req, res) => {
     }
 };
 
-module.exports = { read, readOne, update };
+// [PUT] api/rule
+const updateAll = async (req, res) => {
+    const rules = req.body;
+
+    if (rules.minMoneyBegin === undefined || rules.minMoneyDeposit === undefined) {
+        return res.status(400).json({
+            success: false,
+            message: 'Missing field',
+        });
+    }
+
+    try {
+        const newminMoneyBegin = await Rule.findOneAndUpdate(
+            { name: 'minMoneyBegin' },
+            {
+                value: rules.minMoneyBegin,
+            },
+            { new: true },
+        );
+        const newminMoneyDeposit = await Rule.findOneAndUpdate(
+            { name: 'minMoneyDeposit' },
+            {
+                value: rules.minMoneyDeposit,
+            },
+            { new: true },
+        );
+        if (!newminMoneyBegin || !newminMoneyDeposit) {
+            return res.status(401).json({ success: false, message: 'name rule not found' });
+        } else {
+            return res.json({ success: true, message: 'rule updated!' });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
+module.exports = { read, readOne, update, updateAll };
