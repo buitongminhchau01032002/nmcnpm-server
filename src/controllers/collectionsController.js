@@ -106,7 +106,7 @@ const typeSaving = async (req, res) => {
 // withdraw
 const withdraw = async (req, res) => {
     try {
-        const withdraws = await withdraw.find({});
+        const withdraws = await Withdraw.find({});
         return res.json(withdraws);
     } catch (error) {
         console.log(error.message);
