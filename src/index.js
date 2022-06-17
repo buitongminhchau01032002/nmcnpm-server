@@ -11,6 +11,7 @@ const depositRoute = require('./routes/deposit');
 const withdrawRoute = require('./routes/withdraw');
 const reportDayRoute = require('./routes/reportDay');
 const reportMonthRoute = require('./routes/reportMonth');
+const collectionRoute = require('./routes/collection');
 
 // db
 const connectDB = async () => {
@@ -51,6 +52,7 @@ app.use('/api/deposit', depositRoute);
 app.use('/api/withdraw', withdrawRoute);
 app.use('/api/reportday', reportDayRoute);
 app.use('/api/reportmonth', reportMonthRoute);
+app.use('/api/collections', collectionRoute);
 app.get('/', (req, res) => {
     res.send('<h1>Hello world!</h1>');
 });
