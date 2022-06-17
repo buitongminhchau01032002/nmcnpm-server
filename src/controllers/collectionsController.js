@@ -117,4 +117,4 @@ const withdraw = async (req, res) => {
     }
 };
 
-module.exports = { customer };
+module.exports = { customer, deposit, reportDay, reportMonth, rule, saving, typeSaving, withdraw };
