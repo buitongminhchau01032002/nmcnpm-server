@@ -3,6 +3,7 @@ const collectionsController = require('../controllers/collectionsController');
 const router = express.Router();
 
 router.get('/customer', collectionsController.customer);
+router.get('/saving', collectionsController.saving);
 router.get('/deposit', collectionsController.deposit);
 router.get('/reportDay', collectionsController.reportDay);
 router.get('/reportMonth', collectionsController.reportMonth);
